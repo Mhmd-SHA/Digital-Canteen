@@ -9,15 +9,12 @@ import 'firebase_firestore_data_source.dart';
 
 final authDataSourceProvider = Provider((ref) {
   final firebaseAuth = ref.read(firebaseaAuthInstanceProvider);
-  final firebaseFireStoreAuthDataSource =
-      ref.read(fireStoreAuthDataSourceProvider);
+  final firebaseFireStoreAuthDataSource = ref.read(
+    fireStoreAuthDataSourceProvider,
+  );
   final firebaseFireStore = ref.read(firebaseFirestoreInstanceProvider);
 
-  return AuthDataSource(
-    firebaseAuth,
-    firebaseFireStoreAuthDataSource,
-    ref,
-  );
+  return AuthDataSource(firebaseAuth, firebaseFireStoreAuthDataSource, ref);
 });
 
 class AuthDataSource {
@@ -39,7 +36,9 @@ class AuthDataSource {
   }) async {
     try {
       final response = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       await response.user!.updateDisplayName(name);
       await firebaseFirestoreDataSource.createUser(response.user!.uid);
       return right(response.user!);
@@ -53,8 +52,10 @@ class AuthDataSource {
     }
   }
 
-  Future<Either<AppException, User>> login(
-      {required String email, required String password}) async {
+  Future<Either<AppException, User>> login({
+    required String email,
+    required String password,
+  }) async {
     try {
       final response = await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
@@ -104,7 +105,6 @@ class AuthDataSource {
 // final authDataSourceProvider = Provider<AuthDataSource>(
 //   (ref) => AuthDataSource(ref.read(firebaseAuthInstanceProvider), ref),
 // );
-
 
 // @riverpod
 // AuthDataSource authDataSource(AuthDataSourceRef ref) {

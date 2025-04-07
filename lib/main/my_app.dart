@@ -26,9 +26,11 @@ class MyApp extends ConsumerWidget {
       builder:
           (context, child) => MaterialApp.router(
             title: 'Flutter TDD',
+            // theme: AppTheme.light,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: themeMode,
+            // themeMode: themeMode,
+            themeMode: ThemeMode.dark,
             routerConfig: appRouter.config(),
             debugShowCheckedModeBanner: false,
             builder: EasyLoading.init(

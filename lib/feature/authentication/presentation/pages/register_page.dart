@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:digital_canteen/feature/authentication/presentation/provider/auth_provider.dart';
-import 'package:digital_canteen/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -88,9 +87,7 @@ class RegisterPage extends HookConsumerWidget {
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             15.verticalSpace,
@@ -110,9 +107,7 @@ class RegisterPage extends HookConsumerWidget {
                   contentPadding: const EdgeInsets.symmetric(horizontal: 25),
                   hintText: 'Password',
                 ),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             15.verticalSpace,
@@ -131,9 +126,7 @@ class RegisterPage extends HookConsumerWidget {
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             15.verticalSpace,
@@ -152,9 +145,7 @@ class RegisterPage extends HookConsumerWidget {
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             25.verticalSpace,
@@ -181,13 +172,10 @@ class RegisterPage extends HookConsumerWidget {
                         },
                 child:
                     authState.concreteState == AuthStateConcrete.loading
-                        ? const CircularProgressIndicator(
-                          color: AppColors.black,
-                        )
+                        ? const CircularProgressIndicator()
                         : Text(
                           'Register User',
-                          style: Theme.of(context).textTheme.bodyLarge
-                              ?.copyWith(color: AppColors.white),
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
               ),
             ),

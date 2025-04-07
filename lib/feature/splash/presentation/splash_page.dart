@@ -3,6 +3,7 @@ import 'package:digital_canteen/feature/authentication/presentation/pages/LoginP
 import 'package:digital_canteen/shared/constants/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../shared/routes/app_route.dart';
@@ -32,7 +33,19 @@ class SplashPage extends HookConsumerWidget {
     }, []);
     return Scaffold(
       body: Center(
-        child: Image.asset(ImageAssets.appLogo, height: 250, width: 250),
+        child: Column(
+          children: [
+            Image.asset(ImageAssets.appLogo, height: 250, width: 250),
+            25.verticalSpace,
+            Text(
+              'Digital Canteen',
+              style: Theme.of(
+                context,
+              ).textTheme.displayLarge?.copyWith(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

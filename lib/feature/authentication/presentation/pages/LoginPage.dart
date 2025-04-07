@@ -2,11 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:digital_canteen/feature/authentication/presentation/provider/auth_provider.dart';
 import 'package:digital_canteen/feature/authentication/presentation/provider/auth_state.dart';
 import 'package:digital_canteen/feature/splash/presentation/dashboard_page_admin.dart';
+import 'package:digital_canteen/shared/components/widgets/app_button.dart';
 import 'package:digital_canteen/shared/helpers/logger.dart';
-import 'package:digital_canteen/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../shared/routes/app_route.dart';
@@ -54,80 +55,72 @@ class LoginPage extends HookConsumerWidget {
     });
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              width: 150,
-              height: 150,
-              "assets/images/logo.png",
-              scale: 15,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Digital Canteen',
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: TextFormField(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16).r,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              // Row(
+              //   children: [
+              //     Icon(Icons.fastfood),
+              //     Expanded(
+              //       child: Divider(
+              //         height: 10,
+              //         thickness: 5,
+              //         color: Theme.of(context).primaryColor,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              Text(
+                "Log in to your Account",
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              25.verticalSpace,
+              TextFormField(
                 controller: mailController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(25).r,
                   ),
-                  focusColor: Colors.greenAccent,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 25),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 25).r,
                   hintText: 'Email',
                   hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: TextFormField(
+              20.verticalSpace,
+              TextFormField(
                 controller: passController,
                 decoration: InputDecoration(
-                  suffixIcon: const Icon(
-                    Icons.remove_red_eye,
-                    color: Colors.white,
+                  suffixIcon: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.remove_red_eye),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  focusColor: Colors.greenAccent,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 25),
                   hintText: 'Password',
                 ),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-            ),
-            const SizedBox(height: 5),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 60.0),
-              child: Align(
+              5.verticalSpace,
+              Align(
                 alignment: Alignment.topRight,
                 child: Text(
                   'forgot password ?',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 50,
-              width: 250,
-              child: ElevatedButton(
+              25.verticalSpace,
+              AppButton(
                 onPressed:
                     authState.concreteState == AuthStateConcrete.loading
                         ? () {}
@@ -142,38 +135,12 @@ class LoginPage extends HookConsumerWidget {
                                 password: passController.text,
                               );
                         },
-                child:
-                    authState.concreteState == AuthStateConcrete.loading
-                        ? const CircularProgressIndicator(
-                          color: AppColors.black,
-                        )
-                        : const Text(
-                          'Login',
-                          style: TextStyle(fontSize: 25, color: Colors.white),
-                        ),
-
-                // child: AuthProvider.stream
-                //   ..when(
-                //     initial: () => const Text(
-                //       'Login',
-                //       style: TextStyle(fontSize: 25, color: Colors.white),
-                //     ),
-                //     loading: () => CircularProgressIndicator(
-                //       color: AppColors.black,
-                //     ),
-                //     unauthenticated: (exception) => Text(
-                //       'Login',
-                //       style: TextStyle(fontSize: 25, color: Colors.white),
-                //     ),
-                //     authenticated: (user) => const Text(
-                //       'Login',
-                //       style: TextStyle(fontSize: 25, color: Colors.white),
-                //     ),
-                //   ),
+                buttonText: "Login",
+                isLoading: authState.concreteState == AuthStateConcrete.loading,
               ),
-            ),
-            const SizedBox(height: 200),
-          ],
+              200.verticalSpace,
+            ],
+          ),
         ),
       ),
     );
